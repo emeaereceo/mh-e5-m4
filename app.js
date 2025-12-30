@@ -1,8 +1,11 @@
 const contenedor = document.getElementById("resultado");
 const btnXHR = document.getElementById("cargar-xhr");
 const btnFetch = document.getElementById("cargar-fetch");
+const gifImg = document.getElementById("migif");
 
 const url = "https://jsonplaceholder.typicode.com/users";
+
+const apiKey = "5XStwJki8jqtZBnyksxlvP3tXGDh8US4";
 
 function mostrarLoader() {
   const loader = document.getElementById("loader");
@@ -116,3 +119,20 @@ btnFetch.addEventListener("click", () => {
     })
     .catch(manejarError);
 });
+
+window.addEventListener("DOMContentLoaded", cargarGifInicial);
+
+async function cargarGifInicial() {
+  try {
+    const res = await fetch(
+      `https://api.giphy.com/v1/gifs/10jYR6HT60em2s?api_key=${apiKey}&rating=g`
+    );
+    const data = await res.json();
+
+    const gifUrl = data.data.images.downsized_medium.url;
+
+    gifImg.src = gifUrl;
+  } catch (err) {
+    console.error("Error cargando GIF:", err);
+  }
+}
