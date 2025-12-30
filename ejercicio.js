@@ -40,6 +40,8 @@ btn_fetch.addEventListener("click", () => {
     })
     .then((usuarios) => {
       renderizarUsuarios(usuarios);
+    })
+    .catch((error) => {
+      console.log(error.message);
     });
-  // .catch(manejarError);
 });
